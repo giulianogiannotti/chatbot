@@ -100,7 +100,6 @@ if vectorstore is None:
 retriever = vectorstore.as_retriever(search_type="mmr", search_kwargs={"k": 10})
 
 # --- Inicializar LLM y QA chain ---
-HUGGINGFACEHUB_API_TOKEN = "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"
 llm = HuggingFaceEndpoint(
     repo_id="mistralai/Devstral-Small-2505",
     temperature=0.5,

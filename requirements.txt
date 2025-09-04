@@ -1,0 +1,10 @@
+streamlit
+langchain
+langchain-huggingface
+langchain-community
+faiss-cpu
+unstructured
+python-docx
+PyPDF2
+huggingface-hub
+nltk

@@ -79,7 +79,7 @@ def load_vectorstore():
         for doc_list in results:
             documents.extend(doc_list)
 
-    splitter_small = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
+    splitter_small = RecursiveCharacterTextSplitter(chunk_size=600, chunk_overlap=80)
     splits_small = splitter_small.split_documents(documents)
     for chunk in splits_small:
         res = chunk.metadata.get("resolucion", "Sin identificador")
@@ -87,7 +87,7 @@ def load_vectorstore():
         chunk.page_content = f"[Resolución: {res} | Archivo: {name}]\n{chunk.page_content}"
 
     embedding = HuggingFaceEmbeddings(
-        model_name="intfloat/multilingual-e5-base",
+        model_name="intfloat/multilingual-e5-small",
         model_kwargs={'device': 'cpu'},
         encode_kwargs={'normalize_embeddings': True}
     )
@@ -97,7 +97,7 @@ def load_vectorstore():
 vectorstore = load_vectorstore()
 if vectorstore is None:
     st.stop()
-retriever = vectorstore.as_retriever(search_type="mmr", search_kwargs={"k": 3})
+retriever = vectorstore.as_retriever(search_type="mmr", search_kwargs={"k": 5})
 
 token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 # --- Inicializar LLM y QA chain ---

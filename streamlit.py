@@ -87,7 +87,7 @@ def load_vectorstore():
         chunk.page_content = f"[Resolución: {res} | Archivo: {name}]\n{chunk.page_content}"
 
     embedding = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2",
+        model_name="intfloat/multilingual-e5-small",
         model_kwargs={'device': 'cpu'},
         encode_kwargs={'normalize_embeddings': True}
     )
@@ -97,7 +97,7 @@ def load_vectorstore():
 vectorstore = load_vectorstore()
 if vectorstore is None:
     st.stop()
-retriever = vectorstore.as_retriever(search_type="mmr", search_kwargs={"k": 10})
+retriever = vectorstore.as_retriever(search_type="mmr", search_kwargs={"k": 5})
 
 token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 # --- Inicializar LLM y QA chain ---

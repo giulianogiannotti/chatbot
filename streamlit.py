@@ -99,13 +99,14 @@ if vectorstore is None:
     st.stop()
 retriever = vectorstore.as_retriever(search_type="mmr", search_kwargs={"k": 10})
 
+token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 # --- Inicializar LLM y QA chain ---
 llm = HuggingFaceEndpoint(
     repo_id="mistralai/Devstral-Small-2505",
     temperature=0.5,
     max_new_tokens=500,
     stop_sequences=["Pregunta:", "Respuesta:"],
-    huggingfacehub_api_token=HUGGINGFACEHUB_API_TOKEN
+    huggingfacehub_api_token=token
 )
 
 prompt_template = """Usa el siguiente contexto para responder en español.

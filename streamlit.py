@@ -87,7 +87,7 @@ def load_vectorstore():
         chunk.page_content = f"[Resolución: {res} | Archivo: {name}]\n{chunk.page_content}"
 
     embedding = HuggingFaceEmbeddings(
-        model_name="intfloat/multilingual-e5-small",
+        model_name="intfloat/multilingual-e5-base",
         model_kwargs={'device': 'cpu'},
         encode_kwargs={'normalize_embeddings': True}
     )
